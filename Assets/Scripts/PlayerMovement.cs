@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,7 +10,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float maxSpeed;
     [SerializeField]
-    GameObject player;
+    LayerMask layerMask;
+
 
     float speed;
     void Start()
@@ -28,17 +30,19 @@ public class PlayerMovement : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);
-        if (Physics.Raycast(ray, out hit, 100))
+        //Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);
+        if (Physics.Raycast(ray, out hit, 100, layerMask))
         {
-            Debug.Log(hit.transform.name);
-            float distance = (hit.transform.position - player.transform.position).magnitude;
-            speed = Mathf.Round(distance * 10000) * 0.01f;
-            Debug.Log(distance);
+            //Debug.Log(hit.transform.name);
+            float distance = ( transform.position - hit.point).magnitude;
+            speed = Mathf.Round(distance * 100) * 0.01f;
+            //Debug.Log(distance);
             if (speed >= maxSpeed)
             {
                 speed = maxSpeed;
             }
+            Debug.Log(speed);
+            transform.position = Vector3.MoveTowards(transform.position, hit.point, speed * Time.deltaTime);
 
         }
 
