@@ -16,7 +16,7 @@ public abstract class Part {
         ratchet,
         bit
     }
-
+    
     public abstract Ability ability { get; }
     public abstract int Hp { get; set; }
     public abstract float Speed { get; set; }
