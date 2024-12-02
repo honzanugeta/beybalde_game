@@ -14,6 +14,7 @@ public class PowerUps : MonoBehaviour
 
     protected virtual void HandleCollision(Collision collision)
     {
-       //Edit in specific PowerUp, like SpeedPowerUp
+        Destroy(gameObject);
+        //Edit in specific PowerUp, like SpeedPowerUp
     }
 }

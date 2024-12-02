@@ -1,28 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.GraphicsBuffer;
+
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private LayerMask layerMask;
+    private BeyBlade beyBlade = new BeyBlade();
+    private float speed = 0;
+    private float maxSpeed;
+
+    private Coroutine speedBoostCoroutine;
+    private bool speedBoostActive = false;
 
 
-    float maxSpeed;
-    [SerializeField]
-    LayerMask layerMask;
-    BeyBlade beyBlade = new BeyBlade();
-    float speed = 0;
-
-
-
-    void Start()
+    private void Start()
     {
         setupBeyBlade();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         MovePlayer();
 
@@ -30,9 +29,11 @@ public class PlayerMovement : MonoBehaviour
         {
             beyBlade.parts[0].ability.runAbility();
         }
+
+        Debug.Log(maxSpeed);
     }
 
-    void MovePlayer()
+    private void MovePlayer()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -51,21 +52,37 @@ public class PlayerMovement : MonoBehaviour
 
             transform.position = Vector3.MoveTowards(transform.position, hit.point, speed * Time.deltaTime);
 
-        }
-
-      
-
-
-       
+        } 
     }
-    
 
-
-
-    void setupBeyBlade()
+    private void setupBeyBlade()
     {
         beyBlade.parts[0] = new DefaultPart();
         beyBlade.setUp();
-        maxSpeed = beyBlade.speed;
+        //maxSpeed = beyBlade.speed;
+        maxSpeed = 30;
+    }
+
+    public void ActivateSpeedBoost(float speed, float duration)
+    {
+        if (!speedBoostActive)
+        {
+            maxSpeed += speed; 
+            speedBoostActive = true; 
+        }
+
+        if (speedBoostCoroutine != null)
+        {
+            StopCoroutine(speedBoostCoroutine); 
+        }
+        speedBoostCoroutine = StartCoroutine(SpeedBoostCoroutine(duration));
+    }
+
+    private IEnumerator SpeedBoostCoroutine(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        maxSpeed = 30;
+        speedBoostActive = false; 
     }
 }
+
