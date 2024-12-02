@@ -25,17 +25,17 @@ public class BeyBlade {
 
     private void setUpHp()
     {
-        throw new NotImplementedException();
+       
     }
 
     private void setUpDamage()
     {
-        throw new NotImplementedException();
+        
     }
 
     private void setUpKnockback()
     {
-        throw new NotImplementedException();
+        
     }
 
     private void setUpRotationTime()

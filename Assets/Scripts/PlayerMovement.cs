@@ -7,25 +7,32 @@ using static UnityEngine.GraphicsBuffer;
 public class PlayerMovement : MonoBehaviour
 {
 
-    [SerializeField]
+
     float maxSpeed;
     [SerializeField]
     LayerMask layerMask;
+    BeyBlade beyBlade = new BeyBlade();
+    float speed = 0;
 
 
-    float speed;
+
     void Start()
     {
-        
+        setupBeyBlade();
     }
 
     // Update is called once per frame
     void Update()
     {
         MovePlayer();
+
+        if (Input.GetKeyDown(beyBlade.parts[0].ability.key))
+        {
+            beyBlade.parts[0].ability.runAbility();
+        }
     }
 
-    void MovePlayer() 
+    void MovePlayer()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -34,17 +41,31 @@ public class PlayerMovement : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 100, layerMask))
         {
             //Debug.Log(hit.transform.name);
-            float distance = ( transform.position - hit.point).magnitude;
+            float distance = (transform.position - hit.point).magnitude;
             speed = Mathf.Round(distance * 100) * 0.01f;
             //Debug.Log(distance);
             if (speed >= maxSpeed)
             {
                 speed = maxSpeed;
             }
-            Debug.Log(speed);
+
             transform.position = Vector3.MoveTowards(transform.position, hit.point, speed * Time.deltaTime);
 
         }
 
+      
+
+
+       
+    }
+    
+
+
+
+    void setupBeyBlade()
+    {
+        beyBlade.parts[0] = new DefaultPart();
+        beyBlade.setUp();
+        maxSpeed = beyBlade.speed;
     }
 }
