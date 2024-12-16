@@ -66,6 +66,6 @@ public class PlayerMovement : MonoBehaviour
     {
         beyBlade.parts[0] = new DefaultPart();
         beyBlade.setUp();
-        maxSpeed = beyBlade.speed;
+        maxSpeed = beyBlade.speed + 20;
     }
 }

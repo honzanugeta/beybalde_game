@@ -42,6 +42,8 @@ public class DefaultPart : Part
         set => knockbackForce = value;
     }
 
+    public override string Name => "Default Part";
+
     public Part.Part_type type = Part.Part_type.disk;
 
 }

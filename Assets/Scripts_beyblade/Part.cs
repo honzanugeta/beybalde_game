@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Part {
+    public abstract string Name { get; }
     public abstract int rarita { get; }
     public abstract float passive_dmg { get; } //0 pokud neni disk
     public abstract Material Skin
