@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
 
     void setupBeyBlade()
     {
-        beyBlade.parts[0] = new SpeedUpBit();
+        beyBlade.parts[0] = new DefaultPart();
         beyBlade.setUp();
         /* DO
         for(int i = 0; i < beyBlade.parts.Length; i++)

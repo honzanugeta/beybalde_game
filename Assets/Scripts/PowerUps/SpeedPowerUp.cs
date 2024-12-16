@@ -16,7 +16,7 @@ public class SpeedPowerUp : PowerUps
             PlayerMovement playerMovement = collision.gameObject.GetComponentInParent<PlayerMovement>();
             if (playerMovement != null)
             {
-                playerMovement.ActivateSpeedBoost(speedBoost, Duration);
+                //playerMovement.ActivateSpeedBoost(speedBoost, Duration);
             }
         }
     }
