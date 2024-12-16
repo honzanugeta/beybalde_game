@@ -10,6 +10,14 @@ public class SpeedPowerUp : PowerUps
         base.HandleCollision(collision);
         Debug.Log("Speed boost activated!");
 
-        //TODO speed colided object
+        if (collision != null)
+        {
+
+            PlayerMovement playerMovement = collision.gameObject.GetComponentInParent<PlayerMovement>();
+            if (playerMovement != null)
+            {
+                playerMovement.ActivateSpeedBoost(speedBoost, Duration);
+            }
+        }
     }
 }

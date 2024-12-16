@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     LayerMask layerMask;
     BeyBlade beyBlade = new BeyBlade();
+    [SerializeField]
+    Ability[] abilitky = new Ability[3];
     float speed = 0;
 
 
@@ -64,8 +66,13 @@ public class PlayerMovement : MonoBehaviour
 
     void setupBeyBlade()
     {
-        beyBlade.parts[0] = new DefaultPart();
+        beyBlade.parts[0] = new SpeedUpBit();
         beyBlade.setUp();
-        maxSpeed = beyBlade.speed + 20;
+        /* DO
+        for(int i = 0; i < beyBlade.parts.Length; i++)
+        {
+            abilitky[i] = beyBlade.parts[i].ability;
+        } */
+        maxSpeed = beyBlade.speed;
     }
 }
