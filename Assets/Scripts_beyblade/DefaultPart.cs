@@ -1,49 +1,50 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DefaultPart : Part
 {
-    public override int rarita => 1;
+    // Fields for private storage
+    private int hp = 20;
+    private float speed = 2;
+    private float rotationTime = 10;
+    private float knockbackForce = 10;
+    private Material skin;
 
-    public override Material Skin { get => skin; set => skin = value; }
+    // Override part attributes
+    public override string PartName => "Default Part";
+    public override PartRarity Rarity => PartRarity.Common;
+    public override float PassiveDamage => 0;
+    public override Material Skin
+    {
+        get => skin;
+        set => skin = value;
+    }
 
-    public Material skin;
+    public override Ability Ability => new DefaultAbility();
 
-    public override float passive_dmg => 0;
-
-    public override Ability ability => new DefaultAbility();
-
-    public int hp = 20;
     public override int Hp
     {
         get => hp;
-        set => hp = value;
+        set => hp = Mathf.Max(0, value); // Ensure HP is non-negative
     }
 
-    private float speed = 2;
     public override float Speed
     {
         get => speed;
-        set => speed = value;
+        set => speed = Mathf.Max(0, value); // Ensure speed is non-negative
     }
 
-    public float rotationTime = 10;
-    public override float Rotation_time
+    public override float RotationTime
     {
         get => rotationTime;
-        set => rotationTime = value;
+        set => rotationTime = Mathf.Max(0, value); // Ensure rotation time is non-negative
     }
 
-    public float knockbackForce = 10;
-    public override float Knockback_force
+    public override float KnockbackForce
     {
         get => knockbackForce;
-        set => knockbackForce = value;
+        set => knockbackForce = Mathf.Max(0, value); // Ensure knockback force is non-negative
     }
 
-    public override string Name => "Default Part";
-
-    public Part.Part_type type = Part.Part_type.disk;
-
+    // Define the type of part explicitly
+    public PartType Type => PartType.Disk;
 }
