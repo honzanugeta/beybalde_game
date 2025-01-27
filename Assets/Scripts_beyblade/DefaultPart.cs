@@ -8,6 +8,7 @@ public class DefaultPart : Part
     private float rotationTime = 10;
     private float knockbackForce = 10;
     private Material skin;
+    private Sprite icon;
 
     // Override part attributes
     public override string PartName => "Default Part";
@@ -46,5 +47,11 @@ public class DefaultPart : Part
     }
 
     // Define the type of part explicitly
-    public PartType Type => PartType.Disk;
+    public override PartType Type => PartType.Disk;
+
+    public override Sprite Icon
+    {
+        get => icon;
+        //set => icon = value;
+    }
 }

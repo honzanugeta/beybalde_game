@@ -14,6 +14,8 @@ public abstract class Part
     // Material or appearance of the part
     public abstract Material Skin { get; set; }
 
+    public abstract PartType Type { get; }
+
     // Enum for the type of part
     public enum PartType
     {
@@ -40,5 +42,5 @@ public abstract class Part
     public abstract float RotationTime { get; set; }
     public abstract float KnockbackForce { get; set; }
 
-    // Optional: Define common logic for parts if applicable
+    public abstract Sprite Icon { get; }
 }
