@@ -25,9 +25,9 @@ public class PlayerMovement : MonoBehaviour
     {
         MovePlayer();
 
-        if (Input.GetKeyDown(beyBlade.parts[0].ability.key))
+        if (Input.GetKeyDown(beyBlade.parts[0].Ability.key))
         {
-            beyBlade.parts[0].ability.runAbility();
+            beyBlade.parts[0].Ability.runAbility();
         }
     }
 
