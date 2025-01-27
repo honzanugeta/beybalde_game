@@ -15,8 +15,8 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(beyBlade.parts[0].ability.key)) {
-            beyBlade.parts[0].ability.runAbility();
+        if (Input.GetKeyDown(beyBlade.parts[0].Ability.key)) {
+            beyBlade.parts[0].Ability.runAbility();
         }
 
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
