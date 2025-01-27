@@ -6,15 +6,12 @@ using static UnityEngine.GraphicsBuffer;
 
 public class PlayerMovement : MonoBehaviour
 {
-
-
     float maxSpeed;
     [SerializeField]
     LayerMask layerMask;
     BeyBlade beyBlade = new BeyBlade();
-    [SerializeField]
-    Ability[] abilitky = new Ability[3];
-    float speed = 0;
+    [SerializeField] Ability[] abilitky = new Ability[3];
+    [SerializeField] private float speed = 0;
 
 
 
@@ -53,17 +50,9 @@ public class PlayerMovement : MonoBehaviour
 
             transform.position = Vector3.MoveTowards(transform.position, hit.point, speed * Time.deltaTime);
 
-        }
-
-      
-
-
-       
+        }      
     }
     
-
-
-
     void setupBeyBlade()
     {
         beyBlade.parts[0] = new DefaultPart();
