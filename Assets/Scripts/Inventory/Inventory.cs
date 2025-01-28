@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,6 +30,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] private SerializedDictionary<PartSO.PartRarity, Color> rarityColors;
 
     private Dictionary<PartSO, PartUI> partUIDict = new Dictionary<PartSO, PartUI>();
+
+    private PartSO.PartType lastSelected;
 
     private PartsStorage partsStorage;
 
@@ -86,25 +90,39 @@ public class Inventory : MonoBehaviour
             case PartSO.PartType.Disk:
                 selectedBlade = part;
                 UpdateUI(selectedBladeUI, selectedBlade.icon, selectedBlade.rarity);
+                lastSelected = PartSO.PartType.Disk;
                 break;
 
             case PartSO.PartType.Ratchet:
                 selectedRachet = part;
                 UpdateUI(selectedRachetUI, selectedRachet.icon, selectedRachet.rarity);
+                lastSelected = PartSO.PartType.Ratchet;
                 break;
 
             case PartSO.PartType.Bit:
                 selectedCore = part;
                 UpdateUI(selectedCoreUI, selectedCore.icon, selectedCore.rarity);
+                lastSelected = PartSO.PartType.Bit;
                 break;
+
+              
         }
+        UpdatePartInfoUI(part);
+    }
+
+    private void UpdatePartInfoUI(PartSO part)
+    {
+        Debug.Log(part.partName);
+        //TODO change part UI info
     }
 
     private void UpdateUI(Image uiElement, Sprite icon, PartSO.PartRarity rarity)
     {
         uiElement.color = rarityColors[rarity];
         Image image = uiElement.GetComponentsInChildren<Image>(true)[1];
-        Debug.Log(image.name);
         image.sprite = icon;
+
+        TextMeshProUGUI text = uiElement.GetComponentInChildren<TextMeshProUGUI>(true);
+        text.gameObject.SetActive(false);
     }
 }
