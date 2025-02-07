@@ -20,7 +20,7 @@ public class PartsStorage : MonoBehaviour
         if (loadedParts.Length > 0)
         {
             partList.AddRange(loadedParts);
-            Debug.Log($"Loaded {loadedParts.Length} parts.");
+            Debug.Log($"Loaded {loadedParts.Length} parts SO :).");
         }
         else
         {

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84cf6a7be6afa364f8c5d98e755d30f5, type: 3}
-  m_Name: Part
+  m_Name: Speed King
   m_EditorClassIdentifier: 
   partName: Speed King
   rarity: 1

@@ -59,7 +59,7 @@ public class Inventory : MonoBehaviour
 
     private void PopulateInventory()
     {
-        Debug.Log($"Populating inventory... {partsStorage.PartList.Count}x");
+        //Debug.Log($"Populating inventory... {partsStorage.PartList.Count}x");
         foreach (PartSO part in partsStorage.PartList)
         {
             PartUI partUI = null;
@@ -127,8 +127,8 @@ public class Inventory : MonoBehaviour
                 UpdateUI(selectedCoreUI, selectedCore.icon, selectedCore.rarity);
                 GlobalVariables.SelectedCore = selectedCore;
                 break;
-              
-        }       
+
+        }
         UpdatePartInfoUI(part);
 
     }
@@ -165,17 +165,28 @@ public class Inventory : MonoBehaviour
     {
         float elapsedTime = 0f;
         Image cover = this.cover.GetComponent<Image>();
+        CanvasGroup canvasGroup = cover.GetComponent<CanvasGroup>();
 
         Color startColor = cover.color;
         Color endColor = new Color(startColor.r, startColor.g, startColor.b, 0f);
 
+        float startAlpha = canvasGroup.alpha;
+        float endAlpha = 0f;
+
         while (elapsedTime < fadeTime)
         {
-            cover.color = Color.Lerp(startColor, endColor, elapsedTime / fadeTime);
+            float t = elapsedTime / fadeTime;
+            cover.color = Color.Lerp(startColor, endColor, t);
+            canvasGroup.alpha = Mathf.Lerp(startAlpha, endAlpha, t);
+
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        cover.color = endColor;
+        canvasGroup.alpha = endAlpha;
     }
+
 
     private void ClearPartInfoStats()
     {
@@ -198,7 +209,7 @@ public class Inventory : MonoBehaviour
     private void CreateStatUI(string statName, float statValue, float maxValue)
     {
         StatUI statUI = Instantiate(statUIPrefab, statDoc);
-        statUI.SetStat(statName, statValue, maxValue);
+        statUI.SetStat(statName, statValue, maxValue, new Color32(0, 128, 255, 255));
         statsUIs.Add(statUI);
     }
 
