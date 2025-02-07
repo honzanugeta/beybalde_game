@@ -63,6 +63,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void dealDamage(float dmg)
+    {
+
+    }
+
     void MovePlayer()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -101,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log("setting parts");
         beyBlade.parts[0] = new DefaultPart(GlobalVariables.SelectedCore);
-       // beyBlade.parts[1] = new DefaultPart(GlobalVariables.SelectedRachet);
+        beyBlade.parts[1] = new DefaultPart(GlobalVariables.SelectedRachet);
         beyBlade.parts[2] = new DefaultPart(GlobalVariables.SelectedBlade);
         beyBlade.setUp();
         /* DO
