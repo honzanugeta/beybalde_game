@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84cf6a7be6afa364f8c5d98e755d30f5, type: 3}
-  m_Name: FireCore
+  m_Name: VoltShart
   m_EditorClassIdentifier: 
-  partName: FireCore
-  rarity: 3
-  passiveDamage: 50
+  partName: 
+  rarity: 0
+  passiveDamage: 75
   skin: {fileID: 0}
   type: 0
-  hp: 10
-  speed: 10
-  rotationTime: 10
-  knockbackForce: 10
-  icon: {fileID: 21300000, guid: 417ec1c0543c4e84585a9bc4f4ddd01b, type: 3}
+  hp: 690
+  speed: 7
+  rotationTime: 1.7
+  knockbackForce: 7
+  icon: {fileID: 0}
