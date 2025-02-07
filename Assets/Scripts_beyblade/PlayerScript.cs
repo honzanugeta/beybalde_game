@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,4 +30,4 @@ public class PlayerScript : MonoBehaviour
         beyBlade.setUp();
         speed = beyBlade.speed + 20;
     }
-}
+}*/

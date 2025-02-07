@@ -1,9 +1,14 @@
 using UnityEngine;
 
-public abstract class Part : MonoBehaviour
+public abstract class Part
 {
+
+    public Part(PartSO p)
+    {
+        this.partSO = p;
+    }
     // Reference to the PartSO
-    [SerializeField] private PartSO partSO;
+    private PartSO partSO;
 
     // Override part attributes from PartSO
     public virtual string PartName => partSO.partName;

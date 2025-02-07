@@ -36,6 +36,8 @@ public class Enemy : MonoBehaviour
     BeyBlade beyBlade = new BeyBlade();
     [SerializeField]
     Ability[] abilitky = new Ability[3];
+    [SerializeField]
+    PartSO part;
 
     public enum BotState
     {
@@ -114,7 +116,7 @@ public class Enemy : MonoBehaviour
             Debug.Log("attack");
             //Play attack anim
             isAttacking = false; // az se animace dokonci dat na false
-            beyBlade.parts[0].ability.runAbility();
+            beyBlade.parts[0].Ability.runAbility();
             GetComponent<Rigidbody>().velocity = Vector3.zero;
            cooldownTimer = cooldownTime;
             currentState = BotState.Cooldown;
@@ -199,7 +201,7 @@ public class Enemy : MonoBehaviour
 
     void setupBeyBlade()
     {
-        beyBlade.parts[0] = new DefaultPart();
+        beyBlade.parts[0] = new DefaultPart(part);
         beyBlade.setUp();
         maxSpeed = beyBlade.speed + 60;
     }

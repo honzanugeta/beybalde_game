@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     Animator childAnimator;
     [SerializeField]
     GameObject failPanel;
+    [SerializeField]
+    PartSO part;
 
 
     void Start()
@@ -97,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
     
     void setupBeyBlade()
     {
-        beyBlade.parts[0] = new DefaultPart();
+        beyBlade.parts[0] = new DefaultPart(part);
         beyBlade.setUp();
         /* DO
         for(int i = 0; i < beyBlade.parts.Length; i++)
