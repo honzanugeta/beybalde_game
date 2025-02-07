@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using VInspector;
@@ -14,6 +12,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Transform bladesGrid;
     [SerializeField] private Transform coresGrid;
     [SerializeField] private Transform rachetsGrid;
+    [SerializeField] private PartUI partUiPrefab;
 
     [Header("Selected Storage UI")]
     [SerializeField] private Image selectedBladeUI;
@@ -25,13 +24,30 @@ public class Inventory : MonoBehaviour
     [SerializeField, ReadOnly] private PartSO selectedCore;
     [SerializeField, ReadOnly] private PartSO selectedRachet;
 
-    [SerializeField] private PartUI partUiPrefab;
+    [Header("Part Info UI")]
+    [SerializeField] private TextMeshProUGUI partNameTMP;
+    [SerializeField] private TextMeshProUGUI partTypeTMP;
+
+    [Header("Stats")]
+    [SerializeField] private StatUI statUIPrefab;
+    [SerializeField] private Transform statDoc;
+    [SerializeField] private GameObject cover;
+    [SerializeField] private float fadeTime = 1.2f;
+
+    private bool coverIsHidden = false;
+
+    private float maxDamageInfo;
+    private float maxHpInfo;
+    private float maxSpeedInfo;
+    private float maxRotationInfo;
+    private float maxKnockbackInfo;
+
+    private List<StatUI> statsUIs = new List<StatUI>();
+
 
     [SerializeField] private SerializedDictionary<PartSO.PartRarity, Color> rarityColors;
 
     private Dictionary<PartSO, PartUI> partUIDict = new Dictionary<PartSO, PartUI>();
-
-    private PartSO.PartType lastSelected;
 
     private PartsStorage partsStorage;
 
@@ -59,6 +75,12 @@ public class Inventory : MonoBehaviour
                     partUI = Instantiate(partUiPrefab, coresGrid);
                     break;
             }
+
+            maxDamageInfo = Mathf.Max(maxDamageInfo, part.damage);
+            maxHpInfo = Mathf.Max(maxHpInfo, part.hp);
+            maxSpeedInfo = Mathf.Max(maxSpeedInfo, part.speed);
+            maxRotationInfo = Mathf.Max(maxRotationInfo, part.rotationTime);
+            maxKnockbackInfo = Mathf.Max(maxKnockbackInfo, part.knockbackForce);
 
             partUIDict.Add(part, partUI); // Add to dictionary
             partUI.SetInventory(this);
@@ -90,14 +112,12 @@ public class Inventory : MonoBehaviour
             case PartSO.PartType.Disk:
                 selectedBlade = part;
                 UpdateUI(selectedBladeUI, selectedBlade.icon, selectedBlade.rarity);
-                lastSelected = PartSO.PartType.Disk;
                 GlobalVariables.SelectedBlade = selectedBlade;
                 break;
 
             case PartSO.PartType.Ratchet:
                 selectedRachet = part;
                 UpdateUI(selectedRachetUI, selectedRachet.icon, selectedRachet.rarity);
-                lastSelected = PartSO.PartType.Ratchet;
                 GlobalVariables.SelectedRachet = selectedRachet;
 
                 break;
@@ -105,24 +125,81 @@ public class Inventory : MonoBehaviour
             case PartSO.PartType.Bit:
                 selectedCore = part;
                 UpdateUI(selectedCoreUI, selectedCore.icon, selectedCore.rarity);
-                lastSelected = PartSO.PartType.Bit;
                 GlobalVariables.SelectedCore = selectedCore;
                 break;
-
               
-        }
-
-        
-       
-        
+        }       
         UpdatePartInfoUI(part);
 
     }
 
     private void UpdatePartInfoUI(PartSO part)
     {
-        Debug.Log(part.partName);
-        //TODO change part UI info
+        if (rarityColors.TryGetValue(part.rarity, out Color rarityColor))
+        {
+            // Convert color to hex format
+            string colorHex = ColorUtility.ToHtmlStringRGB(rarityColor);
+
+            // Set text with only part.rarity colored
+            partNameTMP.text = $"{part.partName} <color=#{colorHex}>({part.rarity})</color>";
+        }
+        else
+        {
+            // Fallback if rarity is not found in the dictionary
+            partNameTMP.text = $"{part.partName} ({part.rarity})";
+        }
+
+        partTypeTMP.text = part.type.ToString();
+
+        if (!coverIsHidden)
+        {
+            coverIsHidden = true;
+            StartCoroutine(FadeCover(fadeTime));
+        }
+
+        ClearPartInfoStats();
+        CreatePartInfoStats(part);
+    }
+
+    private IEnumerator FadeCover(float fadeTime)
+    {
+        float elapsedTime = 0f;
+        Image cover = this.cover.GetComponent<Image>();
+
+        Color startColor = cover.color;
+        Color endColor = new Color(startColor.r, startColor.g, startColor.b, 0f);
+
+        while (elapsedTime < fadeTime)
+        {
+            cover.color = Color.Lerp(startColor, endColor, elapsedTime / fadeTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    private void ClearPartInfoStats()
+    {
+        foreach (StatUI statUI in statsUIs)
+        {
+            Destroy(statUI.gameObject);
+        }
+        statsUIs.Clear();
+    }
+
+    private void CreatePartInfoStats(PartSO part)
+    {
+        CreateStatUI("Damage", part.damage, maxDamageInfo);
+        CreateStatUI("HP", part.hp, maxHpInfo);
+        CreateStatUI("Speed", part.speed, maxSpeedInfo);
+        CreateStatUI("Rotation", part.rotationTime, maxRotationInfo);
+        CreateStatUI("Knockback", part.knockbackForce, maxKnockbackInfo);
+    }
+
+    private void CreateStatUI(string statName, float statValue, float maxValue)
+    {
+        StatUI statUI = Instantiate(statUIPrefab, statDoc);
+        statUI.SetStat(statName, statValue, maxValue);
+        statsUIs.Add(statUI);
     }
 
     private void UpdateUI(Image uiElement, Sprite icon, PartSO.PartRarity rarity)

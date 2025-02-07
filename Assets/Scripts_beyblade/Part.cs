@@ -13,7 +13,7 @@ public abstract class Part
     // Override part attributes from PartSO
     public virtual string PartName => partSO.partName;
     public virtual PartSO.PartRarity Rarity => partSO.rarity;
-    public virtual float PassiveDamage => partSO.passiveDamage;
+    public virtual float PassiveDamage => partSO.damage;
 
     public virtual Material Skin
     {

@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84cf6a7be6afa364f8c5d98e755d30f5, type: 3}
   m_Name: BlizzardShard
   m_EditorClassIdentifier: 
-  partName: 
+  partName: Blizzard Shard
   rarity: 1
-  passiveDamage: 70
-  skin: {fileID: 0}
+  damage: 70
   type: 0
   hp: 680
   speed: 7
   rotationTime: 1.8
   knockbackForce: 8
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 8809d7ab518b1494e81d842b33840a60, type: 3}
+  skin: {fileID: 0}

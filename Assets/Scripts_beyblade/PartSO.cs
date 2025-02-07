@@ -9,12 +9,10 @@ public class PartSO : ScriptableObject
     // Rarity of the part
     public PartRarity rarity;
 
-    // Passive damage, 0 if not applicable
-    public float passiveDamage;
+    // Damage, 0 if not applicable
+    public float damage;
 
-    // Material or appearance of the part
-    public Material skin;
-
+    // Type of the part
     public PartType type;
 
     // Attributes of the part
@@ -41,4 +39,7 @@ public class PartSO : ScriptableObject
         Epic,
         Legendary
     }
+
+    // Material or appearance of the part
+    public Material skin;
 }
