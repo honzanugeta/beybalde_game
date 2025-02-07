@@ -91,23 +91,32 @@ public class Inventory : MonoBehaviour
                 selectedBlade = part;
                 UpdateUI(selectedBladeUI, selectedBlade.icon, selectedBlade.rarity);
                 lastSelected = PartSO.PartType.Disk;
+                GlobalVariables.SelectedBlade = selectedBlade;
                 break;
 
             case PartSO.PartType.Ratchet:
                 selectedRachet = part;
                 UpdateUI(selectedRachetUI, selectedRachet.icon, selectedRachet.rarity);
                 lastSelected = PartSO.PartType.Ratchet;
+                GlobalVariables.SelectedRachet = selectedRachet;
+
                 break;
 
             case PartSO.PartType.Bit:
                 selectedCore = part;
                 UpdateUI(selectedCoreUI, selectedCore.icon, selectedCore.rarity);
                 lastSelected = PartSO.PartType.Bit;
+                GlobalVariables.SelectedCore = selectedCore;
                 break;
 
               
         }
+
+        
+       
+        
         UpdatePartInfoUI(part);
+
     }
 
     private void UpdatePartInfoUI(PartSO part)

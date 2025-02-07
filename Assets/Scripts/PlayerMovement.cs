@@ -99,7 +99,10 @@ public class PlayerMovement : MonoBehaviour
     
     void setupBeyBlade()
     {
-        beyBlade.parts[0] = new DefaultPart(part);
+        Debug.Log("setting parts");
+        beyBlade.parts[0] = new DefaultPart(GlobalVariables.SelectedCore);
+       // beyBlade.parts[1] = new DefaultPart(GlobalVariables.SelectedRachet);
+        beyBlade.parts[2] = new DefaultPart(GlobalVariables.SelectedBlade);
         beyBlade.setUp();
         /* DO
         for(int i = 0; i < beyBlade.parts.Length; i++)
@@ -107,11 +110,11 @@ public class PlayerMovement : MonoBehaviour
             abilitky[i] = beyBlade.parts[i].ability;
         } */
         maxSpeed = beyBlade.speed + 20;
-        /*for (int i = 0; i < beyBlade.parts.Length; i++)
+        for (int i = 0; i < beyBlade.parts.Length; i++)
         {
-            rotationTime += beyBlade.parts[i].Rotation_time;
-        }*/
-        rotationTime = 20;
-        maxRotationTime = 20;
+            maxRotationTime += beyBlade.parts[i].RotationTime;
+            Debug.Log(beyBlade.parts[i].RotationTime);
+        }
+        rotationTime = maxRotationTime;
     }
 }
