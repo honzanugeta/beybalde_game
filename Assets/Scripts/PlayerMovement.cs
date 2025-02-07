@@ -6,8 +6,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class PlayerMovement : MonoBehaviour
 {
-
-
     float maxSpeed;
     [SerializeField]
     LayerMask layerMask;
@@ -57,9 +55,9 @@ public class PlayerMovement : MonoBehaviour
 
         MovePlayer();
 
-        if (Input.GetKeyDown(beyBlade.parts[0].ability.key))
+        if (Input.GetKeyDown(beyBlade.parts[0].Ability.key))
         {
-            beyBlade.parts[0].ability.runAbility();
+            beyBlade.parts[0].Ability.runAbility();
         }
     }
 
@@ -93,17 +91,10 @@ public class PlayerMovement : MonoBehaviour
 
             // Move towards the target point
             transform.position = Vector3.MoveTowards(transform.position, hit.point, speed * Time.deltaTime);
-        }
 
-      
-
-
-       
+        }      
     }
     
-
-
-
     void setupBeyBlade()
     {
         beyBlade.parts[0] = new DefaultPart();

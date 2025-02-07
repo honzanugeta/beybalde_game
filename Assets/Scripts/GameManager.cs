@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,9 @@ public class GameManager : MonoBehaviour
 {
     //Ahoj já jsem GameManager a dneska budu managovat hru :)
 
-    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject playerPrefab;
+    private Transform player;
+    internal Transform Player => player;
     [SerializeField] private Transform spawnTransform;
 
     //PowerUps
@@ -15,6 +18,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float powerUpSpawnMinDelay;
     [SerializeField] private float powerUpSpawnMaxDelay;
     private List<SpawnArea> spawnAreas;
+
+
+    internal event Action OnPlayerSpawned;
 
     // Gamemanager
     private static GameManager instance;
@@ -54,7 +60,8 @@ public class GameManager : MonoBehaviour
 
     private void SpawnPlayer(Transform spawnPosition)
     {
-        Instantiate(player, spawnPosition.position, Quaternion.identity);
+        player = Instantiate(playerPrefab, spawnPosition.position, Quaternion.identity).transform;
+        OnPlayerSpawned?.Invoke();
     }
 
     private IEnumerator SpawnRandomPowerUp()
@@ -67,14 +74,14 @@ public class GameManager : MonoBehaviour
                 yield break; 
             }
 
-            SpawnArea randomArea = spawnAreas[Random.Range(0, spawnAreas.Count)];
+            SpawnArea randomArea = spawnAreas[UnityEngine.Random.Range(0, spawnAreas.Count)];
             Vector3 spawnPoint = randomArea.GetRandomPointInBounds();
 
-            GameObject randomPowerUp = powerUpPrefab[Random.Range(0, powerUpPrefab.Count)];
+            GameObject randomPowerUp = powerUpPrefab[UnityEngine.Random.Range(0, powerUpPrefab.Count)];
 
             Instantiate(randomPowerUp, spawnPoint, Quaternion.identity);
 
-            float delay = Random.Range(powerUpSpawnMinDelay, powerUpSpawnMaxDelay);
+            float delay = UnityEngine.Random.Range(powerUpSpawnMinDelay, powerUpSpawnMaxDelay);
             yield return new WaitForSeconds(delay); 
         }
     }

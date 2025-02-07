@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84cf6a7be6afa364f8c5d98e755d30f5, type: 3}
+  m_Name: FireCore
+  m_EditorClassIdentifier: 
+  partName: FireCore
+  rarity: 3
+  passiveDamage: 50
+  skin: {fileID: 0}
+  type: 0
+  hp: 10
+  speed: 10
+  rotationTime: 10
+  knockbackForce: 10
+  icon: {fileID: 21300000, guid: 417ec1c0543c4e84585a9bc4f4ddd01b, type: 3}

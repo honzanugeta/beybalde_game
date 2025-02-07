@@ -20,3 +20,22 @@ public class DefaultAbility : Ability
         Debug.Log("pressed default ability");
     }
 }
+
+public class AbilityA : Ability
+{
+    public override bool reusable => true;
+    public int countdown = 5;
+
+    public override int Countdown { get => countdown; set => countdown = value; }
+
+    public override KeyCode key => KeyCode.Q;
+
+    public override string Name => "Plasma Slash";
+
+    public override bool isPassive => false;
+
+    public override void runAbility()
+    {
+        
+    }
+}
