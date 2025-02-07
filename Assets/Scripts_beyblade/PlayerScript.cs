@@ -28,6 +28,6 @@ public class PlayerScript : MonoBehaviour
     {
         beyBlade.parts[0] = new DefaultPart();
         beyBlade.setUp();
-        speed = beyBlade.speed;
+        speed = beyBlade.speed + 20;
     }
 }
