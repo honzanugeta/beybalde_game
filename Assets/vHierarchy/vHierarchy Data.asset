@@ -24,10 +24,8 @@ MonoBehaviour:
         - globalObjectIdString: GlobalObjectId_V1-2-a505f02cac128b24ba11f7500669830f-2123147149-0
         - globalObjectIdString: GlobalObjectId_V1-2-a505f02cac128b24ba11f7500669830f-392516070-0
         - globalObjectIdString: GlobalObjectId_V1-2-a505f02cac128b24ba11f7500669830f-1111741314-0
-        - globalObjectIdString: GlobalObjectId_V1-2-a505f02cac128b24ba11f7500669830f-396599343-0
-        - globalObjectIdString: GlobalObjectId_V1-2-a505f02cac128b24ba11f7500669830f-1391283720-0
         values:
-        - colorIndex: 8
+        - colorIndex: 0
           iconNameOrGuid: Settings Icon
           isIconRecursive: 0
           isColorRecursive: 0
@@ -49,14 +47,6 @@ MonoBehaviour:
           isColorRecursive: 0
         - colorIndex: 5
           iconNameOrGuid: 
-          isIconRecursive: 0
-          isColorRecursive: 0
-        - colorIndex: 0
-          iconNameOrGuid: Favorite
-          isIconRecursive: 0
-          isColorRecursive: 0
-        - colorIndex: 0
-          iconNameOrGuid: Favorite
           isIconRecursive: 0
           isColorRecursive: 0
   bookmarks: []
