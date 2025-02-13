@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partName: FireCore
   rarity: 2
-  passiveDamage: 65
-  skin: {fileID: 0}
+  damage: 65
   type: 0
   hp: 725
   speed: 7
   rotationTime: 1.2
   knockbackForce: 7
-  icon: {fileID: 21300000, guid: 417ec1c0543c4e84585a9bc4f4ddd01b, type: 3}
+  icon: {fileID: 21300000, guid: 8809d7ab518b1494e81d842b33840a60, type: 3}
+  skin: {fileID: 0}

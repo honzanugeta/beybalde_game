@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
+using VInspector;
 
 public class PartsStorage : MonoBehaviour
 {
-    [SerializeField] private List<PartSO> partList = new List<PartSO>();
+    [SerializeField, ReadOnly] private List<PartSO> partList = new List<PartSO>();
     internal List<PartSO> PartList => partList;
 
     private void Awake()
@@ -19,7 +20,7 @@ public class PartsStorage : MonoBehaviour
         if (loadedParts.Length > 0)
         {
             partList.AddRange(loadedParts);
-            Debug.Log($"Loaded {loadedParts.Length} parts.");
+            Debug.Log($"Loaded {loadedParts.Length} parts SO :).");
         }
         else
         {
