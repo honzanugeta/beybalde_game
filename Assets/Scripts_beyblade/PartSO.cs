@@ -6,6 +6,8 @@ public class PartSO : ScriptableObject
     // Unique identifier for the part
     public string partName;
 
+    public GameObject mesh;
+
     // Rarity of the part
     public PartRarity rarity;
 

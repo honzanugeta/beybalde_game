@@ -13,6 +13,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Transform coresGrid;
     [SerializeField] private Transform rachetsGrid;
     [SerializeField] private PartUI partUiPrefab;
+    [SerializeField] private Transform canvasUI;
 
     [Header("Selected Storage UI")]
     [SerializeField] private Image selectedBladeUI;
@@ -221,5 +222,10 @@ public class Inventory : MonoBehaviour
 
         TextMeshProUGUI text = uiElement.GetComponentInChildren<TextMeshProUGUI>(true);
         text.gameObject.SetActive(false);
+    }
+
+    public void CanvasOpen(bool open)
+    {
+        canvasUI.gameObject.SetActive(open);
     }
 }
