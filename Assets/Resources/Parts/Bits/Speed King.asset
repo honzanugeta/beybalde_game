@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Speed King
   m_EditorClassIdentifier: 
   partName: Speed King
+  cost: 0
+  mesh: {fileID: 0}
   rarity: 1
   damage: 0
   type: 2

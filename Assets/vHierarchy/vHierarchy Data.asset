@@ -27,6 +27,8 @@ MonoBehaviour:
         - globalObjectIdString: GlobalObjectId_V1-2-a505f02cac128b24ba11f7500669830f-396599343-0
         - globalObjectIdString: GlobalObjectId_V1-2-a505f02cac128b24ba11f7500669830f-1391283720-0
         - globalObjectIdString: GlobalObjectId_V1-2-a505f02cac128b24ba11f7500669830f-246054313-0
+        - globalObjectIdString: GlobalObjectId_V1-2-a505f02cac128b24ba11f7500669830f-422456228-0
+        - globalObjectIdString: GlobalObjectId_V1-2-a505f02cac128b24ba11f7500669830f-259253087-0
         values:
         - colorIndex: 8
           iconNameOrGuid: Settings Icon
@@ -58,6 +60,14 @@ MonoBehaviour:
           isColorRecursive: 0
         - colorIndex: 0
           iconNameOrGuid: Favorite
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 8
+          iconNameOrGuid: Settings Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 8
+          iconNameOrGuid: Settings Icon
           isIconRecursive: 0
           isColorRecursive: 0
         - colorIndex: 8
