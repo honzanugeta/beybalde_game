@@ -15,7 +15,7 @@ MonoBehaviour:
   partName: Volt Shart
   cost: 0
   rarity: 0
-  mesh: {fileID: 919132149155446097, guid: f25e8b94190c0ac4ebd1cdb6be483f35, type: 3}
+  mesh: {fileID: 4802022868747431197, guid: 74084afaafc9d0248ad91ced661b6d03, type: 3}
   damage: 50
   type: 0
   hp: 690
