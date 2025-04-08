@@ -17,16 +17,16 @@ public class DmgReceiver : MonoBehaviour
     {
         
     }
-
+    
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("touching");
        if(collision.gameObject.GetComponentInParent<Enemy>() != null)
         {
             isTouching = true;
             enemyPos = collision.transform.position;
         }   
     }
-
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.GetComponentInParent<Enemy>() != null)

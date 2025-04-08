@@ -12,6 +12,7 @@ public class DamageManager : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        disc = GetComponentInChildren<DmgReceiver>();
     }
 
     // Update is called once per frame
@@ -19,7 +20,7 @@ public class DamageManager : MonoBehaviour
     {
         if(disc.isTouching == true)
         {
-            rb.AddForce(new Vector3(disc.enemyPos.x * (-1), disc.enemyPos.y).normalized * 50);
+            rb.AddForce(new Vector3(disc.enemyPos.x * (-1), 0,disc.enemyPos.z * (-1)).normalized * 100 + new Vector3(0,50,0));
         }
     }
 }
