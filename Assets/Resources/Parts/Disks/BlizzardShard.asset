@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: BlizzardShard
   m_EditorClassIdentifier: 
   partName: Blizzard Shard
+  cost: 0
   rarity: 1
+  mesh: {fileID: 919132149155446097, guid: 75dfa2dd9eed2954b82a17018dadfe8e, type: 3}
   damage: 70
   type: 0
   hp: 680

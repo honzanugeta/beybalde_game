@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: PlasmaEdge
   m_EditorClassIdentifier: 
   partName: Plasma Edge
+  cost: 0
   rarity: 2
+  mesh: {fileID: 919132149155446097, guid: f25e8b94190c0ac4ebd1cdb6be483f35, type: 3}
   damage: 50
   type: 0
   hp: 700

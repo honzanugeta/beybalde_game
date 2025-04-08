@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: TitanCore
   m_EditorClassIdentifier: 
   partName: Titan Core
+  cost: 0
   rarity: 0
+  mesh: {fileID: 919132149155446097, guid: f25e8b94190c0ac4ebd1cdb6be483f35, type: 3}
   damage: 0
   type: 1
   hp: 800

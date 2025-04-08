@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: FireCore
   m_EditorClassIdentifier: 
   partName: FireCore
+  cost: 0
   rarity: 2
+  mesh: {fileID: 919132149155446097, guid: 86a258da0a6abee4e8c5688602eefd39, type: 3}
   damage: 65
   type: 0
   hp: 725
