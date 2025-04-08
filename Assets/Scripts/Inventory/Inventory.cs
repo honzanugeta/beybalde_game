@@ -34,6 +34,13 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] private GameObject ownedUI;
 
+    [Header("Abulity Info UI")]
+    [SerializeField] private TextMeshProUGUI abilityNameTMP;
+    [SerializeField] private TextMeshProUGUI abilityDescriptionTMP;
+    [SerializeField] private TextMeshProUGUI abilityCooldownTMP;
+    [SerializeField] private TextMeshProUGUI abilityDurationTMP;
+
+
     [SerializeField] private Color ownedColor;
     [SerializeField] private Color buyColor;
 
@@ -42,6 +49,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Transform statDoc;
     [SerializeField] private GameObject cover;
     [SerializeField] private float fadeTime = 1.2f;
+
+
 
     private bool coverIsHidden = false;
 
