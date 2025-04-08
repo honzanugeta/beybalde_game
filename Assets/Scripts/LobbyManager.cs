@@ -32,7 +32,7 @@ public class LobbyManager : MonoBehaviour
         playerCurrency.LoadCoins();
 
         // Testing method to lock all parts
-        // LockAllParts();
+        LockAllParts();
     }
 
     private void LockAllParts()
@@ -47,10 +47,5 @@ public class LobbyManager : MonoBehaviour
     internal void OpenInventory(bool open)
     {
         inventory.CanvasOpen(open);
-    }
-
-    internal void RemoveCoins(int v)
-    {
-        throw new NotImplementedException();
     }
 }

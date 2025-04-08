@@ -21,6 +21,8 @@ public class DataManager : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        DontDestroyOnLoad(this.gameObject);
+
         playerCurrency = GetComponent<PlayerCurrency>();
     }
 
