@@ -15,7 +15,7 @@ public abstract class Part : MonoBehaviour
     public virtual PartSO.PartRarity Rarity => partSO.rarity;
     public virtual float PassiveDamage => partSO.damage;
 
-    public virtual GameObject gameObject => partSO.gameObject;
+    public virtual GameObject mesh => partSO.mesh;
 
     public virtual Material Skin
     {

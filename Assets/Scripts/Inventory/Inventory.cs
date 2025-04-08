@@ -30,7 +30,16 @@ public class Inventory : MonoBehaviour
     [Header("Part Info UI")]
     [SerializeField] private TextMeshProUGUI partNameTMP;
     [SerializeField] private TextMeshProUGUI partTypeTMP;
+    [SerializeField] private TextMeshProUGUI costTMP;
+
     [SerializeField] private GameObject ownedUI;
+
+    [Header("Abulity Info UI")]
+    [SerializeField] private TextMeshProUGUI abilityNameTMP;
+    [SerializeField] private TextMeshProUGUI abilityDescriptionTMP;
+    [SerializeField] private TextMeshProUGUI abilityCooldownTMP;
+    [SerializeField] private TextMeshProUGUI abilityDurationTMP;
+
 
     [SerializeField] private Color ownedColor;
     [SerializeField] private Color buyColor;
@@ -40,6 +49,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Transform statDoc;
     [SerializeField] private GameObject cover;
     [SerializeField] private float fadeTime = 1.2f;
+
+
 
     private bool coverIsHidden = false;
 
@@ -116,30 +127,35 @@ public class Inventory : MonoBehaviour
 
     private void UpdateSelectedPart(PartSO part)
     {
-        Image image = null;
+        string partName = part.partName;
+        bool isPartUnlocked = DataManager.instance.IsPartUnlocked(partName);
 
-        switch (part.type)
+        if (isPartUnlocked)
         {
-            case PartSO.PartType.Disk:
-                selectedBlade = part;
-                UpdateUI(selectedBladeUI, selectedBlade.icon, selectedBlade.rarity);
-                GlobalVariables.SelectedBlade = selectedBlade;
-                break;
 
-            case PartSO.PartType.Ratchet:
-                selectedRachet = part;
-                UpdateUI(selectedRachetUI, selectedRachet.icon, selectedRachet.rarity);
-                GlobalVariables.SelectedRachet = selectedRachet;
+            switch (part.type)
+            {
+                case PartSO.PartType.Disk:
+                    selectedBlade = part;
+                    UpdateUI(selectedBladeUI, selectedBlade.icon, selectedBlade.rarity);
+                    GlobalVariables.SelectedBlade = selectedBlade;
+                    break;
 
-                break;
+                case PartSO.PartType.Ratchet:
+                    selectedRachet = part;
+                    UpdateUI(selectedRachetUI, selectedRachet.icon, selectedRachet.rarity);
+                    GlobalVariables.SelectedRatchet = selectedRachet;
 
-            case PartSO.PartType.Bit:
-                selectedCore = part;
-                UpdateUI(selectedCoreUI, selectedCore.icon, selectedCore.rarity);
-                GlobalVariables.SelectedCore = selectedCore;
-                break;
+                    break;
 
+                case PartSO.PartType.Bit:
+                    selectedCore = part;
+                    UpdateUI(selectedCoreUI, selectedCore.icon, selectedCore.rarity);
+                    GlobalVariables.SelectedCore = selectedCore;
+                    break;
+            }
         }
+
         UpdatePartInfoUI(part);
 
     }
@@ -158,6 +174,7 @@ public class Inventory : MonoBehaviour
         }
 
         partTypeTMP.text = partSO.type.ToString();
+        costTMP.text = $"Cost {partSO.cost}";
 
         TextMeshProUGUI ownedText = ownedUI.GetComponentInChildren<TextMeshProUGUI>();
         Image ownedImage = ownedUI.GetComponent<Image>();
@@ -165,10 +182,11 @@ public class Inventory : MonoBehaviour
 
         buyButton.onClick.RemoveAllListeners();
         buyButton.onClick.AddListener(() => TryToUnlockPart(partSO));
-        buyButton.onClick.AddListener(() => UpdatePartInfoUI(partSO));
+        buyButton.onClick.AddListener(() => UpdateSelectedPart(partSO));
 
+        bool isUnlocked = DataManager.instance.IsPartUnlocked(partSO.partName);
 
-        if (DataManager.instance.IsPartUnlocked(partSO.partName))
+        if (isUnlocked)
         {
             ownedText.text = "Owned";
             ownedImage.color = ownedColor;
@@ -208,6 +226,7 @@ public class Inventory : MonoBehaviour
         if (canBuy)
         {
             DataManager.instance.UnlockPart(partName, partCost);
+            UpdateSelectedPart(partSO);
         }
         else
         {

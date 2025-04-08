@@ -9,12 +9,10 @@ public class PartSO : ScriptableObject
     // Cost of the part
     public int cost;
 
-    public GameObject mesh;
-
     // Rarity of the part
     public PartRarity rarity;
 
-    public GameObject gameObject;
+    public GameObject mesh;
 
     // Damage, 0 if not applicable
     public float damage;

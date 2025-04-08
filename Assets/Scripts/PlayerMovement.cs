@@ -112,13 +112,13 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log("setting parts");
         beyBlade.parts[0] = new DefaultPart(GlobalVariables.SelectedCore);
-        GameObject bit = beyBlade.parts[0].gameObject;
+        GameObject bit = beyBlade.parts[0].mesh;
         Instantiate(bit, emptyBit.transform.position, Quaternion.identity,emptyBit);
-        beyBlade.parts[1] = new DefaultPart(GlobalVariables.SelectedRachet);
-        GameObject ratchet = beyBlade.parts[1].gameObject;
+        beyBlade.parts[1] = new DefaultPart(GlobalVariables.SelectedRatchet);
+        GameObject ratchet = beyBlade.parts[1].mesh;
         Instantiate(ratchet, emptyRatchet.transform.position, Quaternion.identity, emptyRatchet);
         beyBlade.parts[2] = new DefaultPart(GlobalVariables.SelectedBlade);
-        GameObject disc = beyBlade.parts[2].gameObject;
+        GameObject disc = beyBlade.parts[2].mesh;
         Instantiate(disc, emptyDisc.transform.position, Quaternion.identity, emptyDisc);
         beyBlade.setUp();
         /* DO
