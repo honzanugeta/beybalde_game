@@ -1,7 +1,9 @@
+using SecPlayerPrefs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 using VInspector;
@@ -13,6 +15,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Transform coresGrid;
     [SerializeField] private Transform rachetsGrid;
     [SerializeField] private PartUI partUiPrefab;
+    [SerializeField] private Transform canvasUI;
 
     [Header("Selected Storage UI")]
     [SerializeField] private Image selectedBladeUI;
@@ -27,6 +30,10 @@ public class Inventory : MonoBehaviour
     [Header("Part Info UI")]
     [SerializeField] private TextMeshProUGUI partNameTMP;
     [SerializeField] private TextMeshProUGUI partTypeTMP;
+    [SerializeField] private GameObject ownedUI;
+
+    [SerializeField] private Color ownedColor;
+    [SerializeField] private Color buyColor;
 
     [Header("Stats")]
     [SerializeField] private StatUI statUIPrefab;
@@ -47,13 +54,17 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] private SerializedDictionary<PartSO.PartRarity, Color> rarityColors;
 
+
     private Dictionary<PartSO, PartUI> partUIDict = new Dictionary<PartSO, PartUI>();
 
     private PartsStorage partsStorage;
+    private PlayerCurrency playerCurrency;
 
     private void Start()
     {
-        partsStorage = GetComponent<PartsStorage>();
+        partsStorage = FindAnyObjectByType<PartsStorage>();
+        playerCurrency = FindAnyObjectByType<PlayerCurrency>();
+
         PopulateInventory();
     }
 
@@ -133,23 +144,42 @@ public class Inventory : MonoBehaviour
 
     }
 
-    private void UpdatePartInfoUI(PartSO part)
+    private void UpdatePartInfoUI(PartSO partSO)
     {
-        if (rarityColors.TryGetValue(part.rarity, out Color rarityColor))
+        if (rarityColors.TryGetValue(partSO.rarity, out Color rarityColor))
         {
-            // Convert color to hex format
             string colorHex = ColorUtility.ToHtmlStringRGB(rarityColor);
-
-            // Set text with only part.rarity colored
-            partNameTMP.text = $"{part.partName} <color=#{colorHex}>({part.rarity})</color>";
+            partNameTMP.text = $"{partSO.partName} <color=#{colorHex}>({partSO.rarity})</color>";
         }
         else
         {
             // Fallback if rarity is not found in the dictionary
-            partNameTMP.text = $"{part.partName} ({part.rarity})";
+            partNameTMP.text = $"{partSO.partName} ({partSO.rarity})";
         }
 
-        partTypeTMP.text = part.type.ToString();
+        partTypeTMP.text = partSO.type.ToString();
+
+        TextMeshProUGUI ownedText = ownedUI.GetComponentInChildren<TextMeshProUGUI>();
+        Image ownedImage = ownedUI.GetComponent<Image>();
+        Button buyButton = ownedUI.GetComponent<Button>();
+
+        buyButton.onClick.RemoveAllListeners();
+        buyButton.onClick.AddListener(() => TryToUnlockPart(partSO));
+        buyButton.onClick.AddListener(() => UpdatePartInfoUI(partSO));
+
+
+        if (DataManager.instance.IsPartUnlocked(partSO.partName))
+        {
+            ownedText.text = "Owned";
+            ownedImage.color = ownedColor;
+            buyButton.interactable = false;
+        }
+        else
+        {
+            ownedText.text = "Buy";
+            ownedImage.color = buyColor;
+            buyButton.interactable = true;
+        }
 
         if (!coverIsHidden)
         {
@@ -158,7 +188,31 @@ public class Inventory : MonoBehaviour
         }
 
         ClearPartInfoStats();
-        CreatePartInfoStats(part);
+        CreatePartInfoStats(partSO);
+    }
+
+    private void TryToUnlockPart(PartSO partSO)
+    {
+        string partName = partSO.partName;
+        int partCost = partSO.cost;
+
+        bool isPartUnlocked = DataManager.instance.IsPartUnlocked(partName);
+
+        if (isPartUnlocked)
+        {
+            Debug.Log("Part already unlocked");
+            return;
+        }
+
+        bool canBuy = playerCurrency.CanBuy(partCost);
+        if (canBuy)
+        {
+            DataManager.instance.UnlockPart(partName, partCost);
+        }
+        else
+        {
+            Debug.Log("Not enough coins to buy this part");
+        }
     }
 
     private IEnumerator FadeCover(float fadeTime)
@@ -185,6 +239,8 @@ public class Inventory : MonoBehaviour
 
         cover.color = endColor;
         canvasGroup.alpha = endAlpha;
+
+        cover.gameObject.SetActive(false);
     }
 
 
@@ -221,5 +277,10 @@ public class Inventory : MonoBehaviour
 
         TextMeshProUGUI text = uiElement.GetComponentInChildren<TextMeshProUGUI>(true);
         text.gameObject.SetActive(false);
+    }
+
+    public void CanvasOpen(bool open)
+    {
+        canvasUI.gameObject.SetActive(open);
     }
 }

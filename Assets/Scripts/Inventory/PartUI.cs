@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class PartUI : MonoBehaviour
 {
     [SerializeField] private Image icon;
+    [SerializeField] public AudioClip clickSound;
+    private AudioSource audioSource;
 
     private Button button;
     private Inventory inventory;
@@ -13,6 +15,11 @@ public class PartUI : MonoBehaviour
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(OnButtonClick);
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
     internal void SetIcon(Sprite newIcon)
     {
@@ -33,5 +40,15 @@ public class PartUI : MonoBehaviour
     private void OnButtonClick()
     {
         inventory.SelectPart(this);
+        PlayClickSound();
+
     }
+    void PlayClickSound()
+    {
+        if (clickSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(clickSound);
+        }
+    }
+    
 }
