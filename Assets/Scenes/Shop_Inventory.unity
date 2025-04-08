@@ -399,7 +399,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickSound: {fileID: 8300000, guid: d1209a7b6063a4db0b6f1651a5382fdf, type: 3}
---- !u!4 &109686082
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5314,5 +5313,4 @@ SceneRoots:
   - {fileID: 793788403}
   - {fileID: 137146543}
   - {fileID: 449954248}
-  - {fileID: 109686082}
   - {fileID: 6030617376430031479}
