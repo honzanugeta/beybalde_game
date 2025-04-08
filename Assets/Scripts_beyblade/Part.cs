@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Part
+public abstract class Part : MonoBehaviour
 {
 
     public Part(PartSO p)
@@ -14,6 +14,8 @@ public abstract class Part
     public virtual string PartName => partSO.partName;
     public virtual PartSO.PartRarity Rarity => partSO.rarity;
     public virtual float PassiveDamage => partSO.damage;
+
+    public virtual GameObject gameObject => partSO.gameObject;
 
     public virtual Material Skin
     {

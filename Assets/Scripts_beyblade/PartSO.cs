@@ -9,6 +9,8 @@ public class PartSO : ScriptableObject
     // Rarity of the part
     public PartRarity rarity;
 
+    public GameObject gameObject;
+
     // Damage, 0 if not applicable
     public float damage;
 

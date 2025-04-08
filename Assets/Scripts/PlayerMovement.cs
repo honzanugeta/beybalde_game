@@ -21,6 +21,12 @@ public class PlayerMovement : MonoBehaviour
     GameObject failPanel;
     [SerializeField]
     PartSO part;
+    [SerializeField]
+    Transform emptyBit;
+    [SerializeField]
+    Transform emptyRatchet;
+    [SerializeField]
+    Transform emptyDisc;
 
 
     void Start()
@@ -106,8 +112,14 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log("setting parts");
         beyBlade.parts[0] = new DefaultPart(GlobalVariables.SelectedCore);
+        GameObject bit = beyBlade.parts[0].gameObject;
+        Instantiate(bit, emptyBit.transform.position, Quaternion.identity,emptyBit);
         beyBlade.parts[1] = new DefaultPart(GlobalVariables.SelectedRachet);
+        GameObject ratchet = beyBlade.parts[1].gameObject;
+        Instantiate(ratchet, emptyRatchet.transform.position, Quaternion.identity, emptyRatchet);
         beyBlade.parts[2] = new DefaultPart(GlobalVariables.SelectedBlade);
+        GameObject disc = beyBlade.parts[2].gameObject;
+        Instantiate(disc, emptyDisc.transform.position, Quaternion.identity, emptyDisc);
         beyBlade.setUp();
         /* DO
         for(int i = 0; i < beyBlade.parts.Length; i++)
