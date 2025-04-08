@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partName: Speed King
   cost: 0
+  mesh: {fileID: 0}
   rarity: 1
-  mesh: {fileID: 919132149155446097, guid: 06b50b9478111de498b3c8fe99742bd4, type: 3}
+  gameObject: {fileID: 1494767568804100100, guid: e08df2493a2c16140ac05f2860d5d4c9,
+    type: 3}
   damage: 0
   type: 2
   hp: 250
